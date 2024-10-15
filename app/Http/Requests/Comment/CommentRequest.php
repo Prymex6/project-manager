@@ -25,7 +25,7 @@ class CommentRequest extends FormRequest
             'content'       => [
                 'required',
                 'min:2'
-            ]
+            ],
         ];
     }
 }

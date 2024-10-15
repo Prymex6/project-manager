@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Group extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'name',
@@ -18,7 +20,7 @@ class Group extends Model
     public function projects()
     {
         return $this->belongsToMany(Project::class, 'project_group')
-            ->withPivot('permission', 'created_at');
+            ->withPivot('created_at');
     }
 
     public function users()
@@ -30,30 +32,24 @@ class Group extends Model
     public function files()
     {
         return $this->belongsToMany(File::class, 'file_group')
-            ->withPivot('permission', 'created_at');
+            ->withPivot('created_at');
     }
 
     public function discussions()
     {
         return $this->belongsToMany(Discussion::class, 'discussion_group')
-            ->withPivot('permission', 'created_at');
-    }
-
-    public function chats()
-    {
-        return $this->belongsToMany(Chat::class, 'chat_group')
-            ->withPivot('permission', 'created_at');
+            ->withPivot('created_at');
     }
 
     public function tasks()
     {
         return $this->belongsToMany(Task::class, 'task_group')
-            ->withPivot('permission', 'created_at');
+            ->withPivot('created_at');
     }
 
     public function tickets()
     {
         return $this->belongsToMany(Ticket::class, 'ticket_group')
-            ->withPivot('permission', 'created_at');
+            ->withPivot('created_at');
     }
 }

@@ -23,18 +23,11 @@ return new class extends Migration
         Schema::create('chat_user', function (Blueprint $table) {
             $table->foreignId('chat_id')->index();
             $table->foreignId('user_id')->index();
-            $table->json('permission')->nullable();;
-            $table->timestamp('created_at');
-        });
-
-        Schema::create('chat_group', function (Blueprint $table) {
-            $table->foreignId('chat_id')->index();
-            $table->foreignId('group_id')->index();
-            $table->json('permission')->nullable();;
             $table->timestamp('created_at');
         });
 
         Schema::create('chat_message', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('chat_id')->index();
             $table->foreignId('user_id')->index();
             $table->text('content');
@@ -50,7 +43,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('chats');
         Schema::dropIfExists('chat_user');
-        Schema::dropIfExists('chat_group');
         Schema::dropIfExists('chat_message');
     }
 };

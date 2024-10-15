@@ -24,14 +24,12 @@ return new class extends Migration
         Schema::create('discussion_user', function (Blueprint $table) {
             $table->foreignId('discussion_id')->index();
             $table->foreignId('user_id')->index();
-            $table->json('permission')->nullable();;
             $table->timestamp('created_at');
         });
 
         Schema::create('discussion_group', function (Blueprint $table) {
             $table->foreignId('discussion_id')->index();
             $table->foreignId('group_id')->index();
-            $table->json('permission')->nullable();;
             $table->timestamp('created_at');
         });
 

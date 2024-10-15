@@ -34,14 +34,12 @@ return new class extends Migration
         Schema::create('project_user', function (Blueprint $table) {
             $table->foreignId('project_id')->index();
             $table->foreignId('user_id')->index();
-            $table->json('permission')->nullable();
             $table->timestamp('created_at')->nullable();
         });
 
         Schema::create('project_group', function (Blueprint $table) {
             $table->foreignId('project_id')->index();
             $table->foreignId('group_id')->index();
-            $table->json('permission')->nullable();
             $table->timestamp('created_at')->nullable();
         });
 

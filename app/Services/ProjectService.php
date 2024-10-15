@@ -6,12 +6,22 @@ use App\Http\Requests\Project\ProjectRequest;
 use App\Http\Resources\Project\ProjectResource;
 use App\Models\Project;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ProjectService
 {
     public function all(): AnonymousResourceCollection
     {
-        $projects = Project::with(['company', 'status'])->paginate(20);
+        if (Gate::allows('all-user')) {
+            $projects = Project::with(['company', 'status'])->whereHas('users', function ($query) {
+                $query->where('user_id', Auth::user()->id);
+            })->orWhereHas('groups', function ($query) {
+                $query->whereIn('group_id', Auth::user()->groups->pluck('id'));
+            })->paginate(20);
+        } else {
+            $projects = Project::with(['company', 'status'])->paginate();
+        }
 
         return ProjectResource::collection($projects);
     }

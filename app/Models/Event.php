@@ -5,10 +5,12 @@ namespace App\Models;
 use App\Models\Event\EventStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Event extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'user_id',
@@ -33,6 +35,6 @@ class Event extends Model
 
     public function status()
     {
-        return $this->hasOne(EventStatus::class);
+        return $this->belongsTo(EventStatus::class);
     }
 }

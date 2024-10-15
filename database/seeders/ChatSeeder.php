@@ -27,9 +27,7 @@ class ChatSeeder extends Seeder
             }
 
             for ($j = 1; $j <= rand(1, 3); $j++) {
-                $chat->users()->attach([rand(1, 10) => ['permission' => null]]);
-
-                $chat->groups()->attach([rand(1, 5) => ['permission' => null]]);
+                $chat->users()->attach([rand(1, 10)]);
             }
         }
     }

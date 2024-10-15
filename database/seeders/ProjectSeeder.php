@@ -45,9 +45,9 @@ class ProjectSeeder extends Seeder
             ]);
 
             for ($j = 1; $j <= rand(1, 3); $j++) {
-                $project->users()->attach([rand(1, 10) => ['permission' => null]]);
+                $project->users()->attach([rand(1, 10)]);
 
-                $project->groups()->attach([rand(1, 5) => ['permission' => null]]);
+                $project->groups()->attach([rand(1, 5)]);
             }
         }
     }

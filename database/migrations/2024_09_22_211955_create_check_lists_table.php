@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('content');
             $table->foreignId('assigned')->nullable()->index();
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

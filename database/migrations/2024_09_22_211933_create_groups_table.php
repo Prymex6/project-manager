@@ -17,6 +17,13 @@ return new class extends Migration
             $table->text('description');
             $table->string('color')->nullable();
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
+        });
+
+        Schema::create('group_permission', function (Blueprint $table) {
+            $table->foreignId('group_id')->index();
+            $table->json('permission')->nullable();
+            $table->timestamp('created_at')->nullable();
         });
     }
 
@@ -26,5 +33,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('groups');
+        Schema::dropIfExists('group_permission');
     }
 };

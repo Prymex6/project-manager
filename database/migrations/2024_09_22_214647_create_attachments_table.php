@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('ticket_id')->index();
             $table->string('path');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

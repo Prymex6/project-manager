@@ -5,10 +5,12 @@ namespace App\Models;
 use App\Models\Task;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CheckList extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'task_id',

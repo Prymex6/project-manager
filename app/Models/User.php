@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
+use App\Models\Chat\ChatMessage;
 use App\Models\Task\TaskStatusHistory;
+use App\Models\User\UserPermission;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -51,37 +54,37 @@ class User extends Authenticatable
     public function projects()
     {
         return $this->belongsToMany(Project::class, 'project_user')
-            ->withPivot('permission', 'created_at');
+            ->withPivot('created_at');
     }
 
     public function groups()
     {
         return $this->belongsToMany(Group::class, 'user_group')
-            ->withPivot('permission', 'created_at');
+            ->withPivot('created_at');
     }
 
     public function files()
     {
         return $this->belongsToMany(File::class, 'file_user')
-            ->withPivot('permission', 'created_at');
+            ->withPivot('created_at');
     }
 
     public function chats()
     {
         return $this->belongsToMany(Chat::class, 'chat_user')
-            ->withPivot('permission', 'created_at');
+            ->withPivot('created_at');
     }
 
     public function discussions()
     {
         return $this->belongsToMany(Discussion::class, 'discussion_user')
-            ->withPivot('permission', 'created_at');
+            ->withPivot('created_at');
     }
 
     public function tasks()
     {
         return $this->belongsToMany(Task::class, 'task_user')
-            ->withPivot('permission', 'created_at');
+            ->withPivot('created_at');
     }
 
     public function tickets()
@@ -163,5 +166,15 @@ class User extends Authenticatable
     public function timesheets()
     {
         return $this->hasMany(Timesheet::class);
+    }
+
+    public function userMessage()
+    {
+        return $this->hasMany(ChatMessage::class);
+    }
+
+    public function permission()
+    {
+        return $this->belongsTo(UserPermission::class);
     }
 }

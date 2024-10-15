@@ -26,9 +26,9 @@ class DiscussionSeeder extends Seeder
             for ($j = 1; $j <= rand(1, 3); $j++) {
                 $discussion->comments()->attach(rand(1, 66));
 
-                $discussion->users()->attach([rand(1, 10) => ['permission' => null]]);
+                $discussion->users()->attach([rand(1, 10)]);
 
-                $discussion->groups()->attach([rand(1, 5) => ['permission' => null]]);
+                $discussion->groups()->attach([rand(1, 5)]);
             }
         }
     }

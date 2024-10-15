@@ -29,9 +29,9 @@ class TicketSeeder extends Seeder
             for ($j = 1; $j <= rand(1, 3); $j++) {
                 $ticket->comments()->attach(rand(1, 66));
 
-                $ticket->users()->attach([rand(1, 10) => ['permission' => null]]);
+                $ticket->users()->attach([rand(1, 10)]);
 
-                $ticket->groups()->attach([rand(1, 5) => ['permission' => null]]);
+                $ticket->groups()->attach([rand(1, 5)]);
             }
         }
     }

@@ -53,14 +53,12 @@ return new class extends Migration
         Schema::create('task_user', function (Blueprint $table) {
             $table->foreignId('task_id')->index();
             $table->foreignId('user_id')->index();
-            $table->json('permission')->nullable();;
             $table->timestamp('created_at');
         });
 
         Schema::create('task_group', function (Blueprint $table) {
             $table->foreignId('task_id')->index();
             $table->foreignId('group_id')->index();
-            $table->json('permission')->nullable();;
             $table->timestamp('created_at');
         });
 
